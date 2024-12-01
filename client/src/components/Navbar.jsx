@@ -4,9 +4,8 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{ bgcolor: "#0a2540" }}>
       <Toolbar>
-        {/* Left side: Group 32 */}
         <Typography
           variant="h6"
           component={Link}
@@ -15,20 +14,20 @@ const Navbar = () => {
             flexGrow: 1,
             textDecoration: 'none',
             color: 'inherit',
+            fontWeight: "bold"
           }}
         >
-          Group 32
+          Dashboard
         </Typography>
 
-        {/* Right side: Navigation Links */}
         <Box>
-          <Button color="inherit" component={Link} to="/temperature">
+          <Button className="navlink" color="inherit" component={Link} to="/temperature" sx={{textTransform: "capitalize", fontWeight: "bold"}}>
             Temperature
           </Button>
-          <Button color="inherit" component={Link} to="/ph">
-            pH
+          <Button className="navlink" color="inherit" component={Link} to="/ph" sx={{textTransform: "capitalize", fontWeight: "bold"}}>
+            Ph
           </Button>
-          <Button color="inherit" component={Link} to="/stirring">
+          <Button className="navlink" color="inherit" component={Link} to="/stirring" sx={{textTransform: "capitalize", fontWeight: "bold"}}>
             Stirring
           </Button>
         </Box>

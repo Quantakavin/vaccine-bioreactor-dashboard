@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import Graph from '../components/Graph';
 import config from '../config/config'
@@ -18,13 +18,13 @@ const TemperatureChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Temperature" data={data} />)
+    return (isPending ? <p>No content to display</p> : <Graph title="Temperature" data={data} min={0} max={50} />)
 }
 
 const Temperature = () => {
     return (
-        <div>
-            <h2>Temperature</h2>
+        <div className="container">
+            <h1 className="title">Temperature</h1>
             <TemperatureChart />
         </div>
     );

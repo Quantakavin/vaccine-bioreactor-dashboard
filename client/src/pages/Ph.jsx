@@ -18,13 +18,13 @@ const PhChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Ph" data={data} />)
+    return (isPending ? <p>No content to display</p> : <Graph title="Ph" data={data} min={0} max={14} />)
 }
 
 const Ph = () => {
     return (
-        <div>
-            <h2>Ph</h2>
+        <div className="container">
+            <h1 className="title">Ph</h1>
             <PhChart />
         </div>
     );

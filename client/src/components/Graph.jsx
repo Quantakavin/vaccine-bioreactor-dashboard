@@ -1,41 +1,47 @@
 import React from 'react';
 import { LineChart } from '@mui/x-charts';
 
-const Graph = ({ title, data }) => {
-    const readings = []
-    const read_times = []
-
-    data.map((item) => {
-        readings.push(item.Reading)
-        read_times.push(new Date(item.Read_At))
-    });
-
-    console.log("readings are ", readings)
-    console.log("read times are ", read_times)
+const Graph = ({ title, data, min, max }) => {
+    const xAxisData = data.map((item) => new Date(item.Read_At).getTime());
+    const yAxisData = data.map((item) => item.Reading);
 
     return (
-        <div style={{ margin: '20px', textAlign: 'center' }}>
+        <div className="graphcontainer" style={{ textAlign: 'center' }}>
             <LineChart
-                width={1000}
-                height={600}
-                xAxis={[{ data: read_times, scaleType: 'time', valueFormatter: (value) => {
-                    const date = new Date(value)
-                    return date.toLocaleString('en-GB', {
-                        year: 'numeric',
-                        month: 'short',
-                        day: 'numeric',
-                        hour: '2-digit',
-                        minute: '2-digit',
-                        second: '2-digit',
-                    })
-                }}]}
-                series={[
+                xAxis={[
                     {
-                        data: readings,
-                        area: true,
-                        baseline: 'min',
+                        data: xAxisData,
+                        scaleType: 'time',
+                        label: 'Time',
+                        labelStyle: {fontWeight: "bold", fontSize: 16},
+                        valueFormatter: (value) => {
+                            const date = new Date(value);
+                            return date.toLocaleString('en-GB', {
+                                month: 'short',
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit',
+                                second: '2-digit',
+                            });
+                        },
                     },
                 ]}
+                yAxis={[
+                    {
+                        label: title,
+                        labelStyle: {fontWeight: "bold", fontSize: 16},
+                        min: min,
+                        max: max,
+                    },
+                ]}
+                series={[
+                    {
+                        data: yAxisData,
+                        area: true,
+                        baseline: 'min'
+                    },
+                ]}
+                height={400}
             />
         </div>
     );

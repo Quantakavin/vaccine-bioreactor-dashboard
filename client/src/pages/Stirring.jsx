@@ -18,13 +18,13 @@ const StirringChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Stirring Speed" data={data} />)
+    return (isPending ? <p>No content to display</p> : <Graph title="Stirring Speed" data={data} min={0} max={5000}/>)
 }
 
 const Stirring = () => {
     return (
-        <div>
-            <h2>Stirring Speed</h2>
+        <div className="container">
+            <h1 className="title">Stirring Speed</h1>
             <StirringChart />
         </div>
     );

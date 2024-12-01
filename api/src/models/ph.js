@@ -1,7 +1,7 @@
 const connection = require('../config/database')
 
 module.exports.getReadings = async () => {
-    const getReadingsQuery = `SELECT Reading, Read_At FROM pH ORDER by Read_At DESC`
+    const getReadingsQuery = `SELECT Reading, Read_At FROM pH`
     return connection.query(getReadingsQuery)
 }
 
