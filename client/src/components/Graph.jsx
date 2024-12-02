@@ -1,7 +1,7 @@
 import React from 'react';
 import { LineChart } from '@mui/x-charts';
 
-const Graph = ({ title, data, min, max }) => {
+const Graph = ({ title, data, min, max, color }) => {
     const xAxisData = data.map((item) => new Date(item.Read_At).getTime());
     const yAxisData = data.map((item) => item.Reading);
 
@@ -38,7 +38,8 @@ const Graph = ({ title, data, min, max }) => {
                     {
                         data: yAxisData,
                         area: true,
-                        baseline: 'min'
+                        baseline: 'min',
+                        color: color
                     },
                 ]}
                 height={400}

@@ -20,7 +20,7 @@ const PhChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Ph" data={data} min={0} max={14} />)
+    return (isPending ? <p>No content to display</p> : <Graph title="Ph" data={data} min={0} max={14} color="#00c04b"/>)
 }
 
 const PhForm = () => {

@@ -20,7 +20,7 @@ const TemperatureChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Temperature" data={data} min={0} max={50} />)
+    return (isPending ? <p>No content to display</p> : <Graph title="Temperature" data={data} min={0} max={50} color="#ff2626"/>)
 }
 
 const TemperatureForm = () => {

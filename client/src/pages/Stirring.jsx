@@ -20,7 +20,7 @@ const StirringChart = () => {
         return <p>No content to display</p>
     }
 
-    return (isPending ? <p>No content to display</p> : <Graph title="Stirring Speed" data={data} min={0} max={5000}/>)
+    return (isPending ? <p>No content to display</p> : <Graph title="Stirring Speed" data={data} min={0} max={5000} color="#03b7b7"/>)
 }
 
 const StirringForm = () => {
