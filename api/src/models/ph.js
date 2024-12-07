@@ -6,7 +6,7 @@ module.exports.getReadings = async () => {
 }
 
 module.exports.getLatestReading = async () => {
-    const getReadingsQuery = `SELECT Reading FROM pH LIMIT 1`
+    const getReadingsQuery = `SELECT Reading FROM pH ORDER BY Read_At DESC LIMIT 1`
     return connection.query(getReadingsQuery)
 }
 
