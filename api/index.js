@@ -20,19 +20,19 @@ const temperatureController = require('./src/controllers/temperatureController')
 const stirringController = require('./src/controllers/phController');
 
 mqttClient.on('message', (topic, message) => {
-    if (topic === '174f42b00b917ee34dd458b473ed90d0-temperature') {
+    if (topic === config.mqttTemperatureTopic) {
         const parsedmessage = JSON.parse(`[${message}]`);
         temperatureController.createReading(
             parsedmessage[0].reading,
             parsedmessage[0].read_time
         );
-    } else if (topic === '174f42b00b917ee34dd458b473ed90d0-ph') {
+    } else if (topic === config.mqttPhTopic) {
         const parsedmessage = JSON.parse(`[${message}]`);
         phController.createReading(
             parsedmessage[0].reading,
             parsedmessage[0].read_time
         );
-    } else if (topic === '174f42b00b917ee34dd458b473ed90d0-stirring') {
+    } else if (topic === config.mqttStirringTopic) {
         const parsedmessage = JSON.parse(`[${message}]`);
         stirringController.createReading(
             parsedmessage[0].reading,

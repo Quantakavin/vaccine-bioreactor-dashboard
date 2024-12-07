@@ -1,11 +1,12 @@
 const mqtt = require('mqtt');
+const config = require('./config')
 
-const client = mqtt.connect("mqtt://broker.hivemq.com")
+const client = mqtt.connect(config.mqttBroker)
 
 client.on('connect', () => {
-    client.subscribe('174f42b00b917ee34dd458b473ed90d0-temperature');
-    client.subscribe('174f42b00b917ee34dd458b473ed90d0-ph');
-    client.subscribe('174f42b00b917ee34dd458b473ed90d0-stirring');
+    client.subscribe(config.mqttTemperatureTopic);
+    client.subscribe(config.mqttPhTopic);
+    client.subscribe(config.mqttStirringTopic);
 });
 
 module.exports = client;

@@ -31,6 +31,13 @@ HOSTNAME = "YOUR_HOSTNAME"
 USERNAME = "YOUR_USERNAME"
 PASSWORD = "YOUR_PASSWORD"
 DBNAME = "Vaccine_Bioreactor"
+MQTT_BROKER = "mqtt://broker.hivemq.com"
+MQTT_TEMPERATURE_TOPIC = '174f42b00b917ee34dd458b473ed90d0-temperature'
+MQTT_PH_TOPIC = '174f42b00b917ee34dd458b473ed90d0-ph'
+MQTT_STIRRING_TOPIC = '174f42b00b917ee34dd458b473ed90d0-stirring'
+MQTT_TEMPERATURE_UPDATE_TOPIC = '174f42b00b917ee34dd458b473ed90d0-temperature-update'
+MQTT_PH_UPDATE_TOPIC = '174f42b00b917ee34dd458b473ed90d0-ph-update'
+MQTT_STIRRING_UPDATE_TOPIC = '174f42b00b917ee34dd458b473ed90d0-stirring-update'
 ```
 
 Replace with YOUR_HOSTNAME, YOUR_USERNAME and YOUR_PASSWORD with the hostname, username and password you set in SQL Workbench
