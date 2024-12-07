@@ -23,6 +23,18 @@ const StirringChart = () => {
     return (isPending ? <p>No content to display</p> : <Graph title="Stirring Speed" data={data} min={0} max={5000} color="#03b7b7"/>)
 }
 
+const LatestReading = () => {
+    const { isPending, error, data } = useQuery({
+        queryKey: ['lateststirring'],
+        queryFn: async () => {
+            const response = await axios.get(`${config.baseURL}/lateststirring`)
+            return response.data
+        },
+    })
+
+    return (<h4> Latest Reading: {(error || isPending) ? "Unavaiable" : data[0].Reading + " RPM"} </h4>)
+}
+
 const StirringForm = () => {
     const { register, handleSubmit, reset } = useForm();
 
@@ -48,6 +60,7 @@ const StirringForm = () => {
 
     return (
         <div className="formcontainer">
+            <LatestReading />
             <h4>Update Stirring Speed:</h4>
             <form className="updateform" onSubmit={handleSubmit(onSubmit)}>
                 <TextField

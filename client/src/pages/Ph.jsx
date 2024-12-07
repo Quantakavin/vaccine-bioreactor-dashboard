@@ -23,6 +23,18 @@ const PhChart = () => {
     return (isPending ? <p>No content to display</p> : <Graph title="Ph" data={data} min={0} max={14} color="#00c04b"/>)
 }
 
+const LatestReading = () => {
+    const { isPending, error, data } = useQuery({
+        queryKey: ['latestph'],
+        queryFn: async () => {
+            const response = await axios.get(`${config.baseURL}/latestph`)
+            return response.data
+        },
+    })
+
+    return (<h4> Latest Reading: {(error || isPending) ? "Unavaiable" : data[0].Reading} </h4>)
+}
+
 const PhForm = () => {
     const { register, handleSubmit, reset } = useForm();
 
@@ -48,6 +60,7 @@ const PhForm = () => {
 
     return (
         <div className="formcontainer">
+            <LatestReading />
             <h4>Update Ph:</h4>
             <form className="updateform" onSubmit={handleSubmit(onSubmit)}>
                 <TextField

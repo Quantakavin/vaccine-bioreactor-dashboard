@@ -23,6 +23,17 @@ const TemperatureChart = () => {
     return (isPending ? <p>No content to display</p> : <Graph title="Temperature" data={data} min={0} max={50} color="#ff2626"/>)
 }
 
+const LatestReading = () => {
+    const { isPending, error, data } = useQuery({
+        queryKey: ['latesttemperature'],
+        queryFn: async () => {
+            const response = await axios.get(`${config.baseURL}/latesttemperature`)
+            return response.data
+        },
+    })
+
+    return (<h4> Latest Reading: {(error || isPending) ? "Unavaiable" : data[0].Reading + " °C"} </h4>)
+}
 const TemperatureForm = () => {
     const { register, handleSubmit, reset } = useForm();
 
@@ -48,6 +59,7 @@ const TemperatureForm = () => {
 
     return (
         <div className="formcontainer">
+            <LatestReading />
             <h4>Update Temperature:</h4>
             <form className="updateform" onSubmit={handleSubmit(onSubmit)}>
                 <TextField
