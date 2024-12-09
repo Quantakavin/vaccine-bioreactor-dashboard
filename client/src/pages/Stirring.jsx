@@ -1,10 +1,11 @@
 import React from 'react';
 import { useQuery, useMutation } from '@tanstack/react-query';
-import { Button, TextField } from '@mui/material';
+import { Alert, Button, TextField } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import Graph from '../components/Graph';
-import config from '../config/config'
+import config from '../config/config';
+import Swal from "sweetalert2";
 
 const StirringChart = () => {
     const { isPending, error, data } = useQuery({
@@ -36,6 +37,21 @@ const LatestReading = () => {
 }
 
 const StirringForm = () => {
+
+    const Toast = Swal.mixin({
+        toast: true,
+        position: "top",
+        width: 500,
+        showConfirmButton: false,
+        showCloseButton: true,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+          toast.onmouseenter = Swal.stopTimer;
+          toast.onmouseleave = Swal.resumeTimer;
+        }
+      });
+
     const { register, handleSubmit, reset } = useForm();
 
     const mutation = useMutation({
@@ -47,12 +63,18 @@ const StirringForm = () => {
     const onSubmit = (data) => {
         mutation.mutate(data, {
             onSuccess: () => {
-                alert('Stirring Speed updated successfully');
+                Toast.fire({
+                    icon: "success",
+                    title: "Stirring speed updated successfully"
+                });
                 reset();
             },
             onError: (error) => {
+                Toast.fire({
+                    icon: "error",
+                    title: "Failed to update stirring speed"
+                });
                 console.log('Error updating stirring speed:', error);
-                alert('Failed to update stirring speed');
             },
         });
     }
@@ -71,12 +93,14 @@ const StirringForm = () => {
                     inputProps={{
                         step: 0.01
                     }}
+                    className="formfield"
                     style={{ marginBottom: '10px'}}
                 />
                 <Button variant="contained" color="primary" type="submit" className="submitbutton">
                     Submit
                 </Button>
             </form>
+            {mutation.isError? <Alert style = {{ marginTop: 12, fontSize: 15 }} severity="error">{mutation.error.response.data.message}</Alert> : <></>}
         </div>
     );
 };

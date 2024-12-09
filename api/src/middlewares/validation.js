@@ -39,7 +39,7 @@ const validation = {
         const { reading } = req.body
 
         if (reading < 500 || reading > 1300) {
-            res.status(400).json({ message: 'Ph can only be between 500 and 1300' })
+            res.status(400).json({ message: 'Stirring speed can only be between 500 and 1300' })
         } else {
             next()
         }
