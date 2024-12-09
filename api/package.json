@@ -16,6 +16,7 @@
     "express": "^4.21.1",
     "express-form-data": "^2.0.23",
     "mqtt": "^5.10.2",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "validator": "^13.12.0"
   }
 }

@@ -38,7 +38,11 @@ module.exports.createReading = async (req, res) => {
 module.exports.updateReading = async (req, res) => {
     const { reading } = req.body
     try {
-        mqttClient.publish(config.mqttStirringUpdateTopic, JSON.stringify({reading: reading}))
+        const buffer = new ArrayBuffer(4);
+        const dataView = new DataView(buffer);
+        dataView.setFloat32(0, reading, true);
+        message = new Uint8Array(buffer);
+        mqttClient.publish(config.mqttStirringUpdateTopic, message)
         return res.status(200).json({ message: 'Stirring updated successfully' })
     } catch (error) {
         console.log(error)

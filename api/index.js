@@ -21,23 +21,20 @@ const stirringController = require('./src/controllers/phController');
 
 mqttClient.on('message', (topic, message) => {
     if (topic === config.mqttTemperatureTopic) {
-        const parsedmessage = JSON.parse(`[${message}]`);
-        temperatureController.createReading(
-            parsedmessage[0].reading,
-            parsedmessage[0].read_time
-        );
+        const buffer = Buffer.from(message);
+        const str = buffer.toString('utf-8');
+        const parsedmessage = parseFloat(str);
+        temperatureController.createReading(parsedmessage);
     } else if (topic === config.mqttPhTopic) {
-        const parsedmessage = JSON.parse(`[${message}]`);
-        phController.createReading(
-            parsedmessage[0].reading,
-            parsedmessage[0].read_time
-        );
+        const buffer = Buffer.from(message);
+        const str = buffer.toString('utf-8');
+        const parsedmessage = parseFloat(str);
+        phController.createReading(parsedmessage);
     } else if (topic === config.mqttStirringTopic) {
-        const parsedmessage = JSON.parse(`[${message}]`);
-        stirringController.createReading(
-            parsedmessage[0].reading,
-            parsedmessage[0].read_time
-        );
+        const buffer = Buffer.from(message);
+        const str = buffer.toString('utf-8');
+        const parsedmessage = parseFloat(str);
+        stirringController.createReading(parsedmessage);
     }
 });
 
