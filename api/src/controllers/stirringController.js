@@ -22,18 +22,18 @@ module.exports.getLatestReading = async (req, res) => {
     }
 }
 
-module.exports.createReading = async (req, res) => {
-    const { reading, read_time } = req.body
-    try {
-        const results = await stirring.createReading(reading, read_time)
-        return res.status(200).json(results)
-    } catch (error) {
-        console.log(error)
-        return res
-            .status(500)
-            .json({ message: 'Create reading failed in backend' })
-    }
-}
+// module.exports.createReading = async (req, res) => {
+//     const { reading, read_time } = req.body
+//     try {
+//         const results = await stirring.createReading(reading, read_time)
+//         return res.status(200).json(results)
+//     } catch (error) {
+//         console.log(error)
+//         return res
+//             .status(500)
+//             .json({ message: 'Create reading failed in backend' })
+//     }
+// }
 
 module.exports.updateReading = async (req, res) => {
     const { reading } = req.body

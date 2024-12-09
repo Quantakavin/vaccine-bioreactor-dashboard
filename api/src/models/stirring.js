@@ -10,8 +10,7 @@ module.exports.getLatestReading = async () => {
     return connection.query(getReadingsQuery)
 }
 
-
-module.exports.createReading = async (reading, read_time) => {
-    const createReading = `INSERT INTO Stirring (Reading, Read_At) values (?, ?)`
-    return connection.query(createReading, [reading, read_time])
+module.exports.createReading = async (reading) => {
+    const createReading = `INSERT INTO Stirring (Reading, Read_At) values (?, NOW())`
+    return connection.query(createReading, [reading])
 }

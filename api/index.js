@@ -15,26 +15,30 @@ const http = require('http');
 
 const server = http.createServer(app);
 
-const phController = require('./src/controllers/phController');
-const temperatureController = require('./src/controllers/temperatureController');
-const stirringController = require('./src/controllers/phController');
+const ph = require('./src/models/ph')
+const temperature= require('./src/models/temperature')
+const stirring = require('./src/models/temperature')
 
 mqttClient.on('message', (topic, message) => {
-    if (topic === config.mqttTemperatureTopic) {
-        const buffer = Buffer.from(message);
-        const str = buffer.toString('utf-8');
-        const parsedmessage = parseFloat(str);
-        temperatureController.createReading(parsedmessage);
-    } else if (topic === config.mqttPhTopic) {
-        const buffer = Buffer.from(message);
-        const str = buffer.toString('utf-8');
-        const parsedmessage = parseFloat(str);
-        phController.createReading(parsedmessage);
-    } else if (topic === config.mqttStirringTopic) {
-        const buffer = Buffer.from(message);
-        const str = buffer.toString('utf-8');
-        const parsedmessage = parseFloat(str);
-        stirringController.createReading(parsedmessage);
+    try {
+        if (topic === config.mqttTemperatureTopic) {
+            const buffer = Buffer.from(message);
+            const str = buffer.toString('utf-8');
+            const parsedmessage = parseFloat(str);
+            temperature.createReading(parsedmessage)
+        } else if (topic === config.mqttPhTopic) {
+            const buffer = Buffer.from(message);
+            const str = buffer.toString('utf-8');
+            const parsedmessage = parseFloat(str);
+            ph.createReading(parsedmessage)
+        } else if (topic === config.mqttStirringTopic) {
+            const buffer = Buffer.from(message);
+            const str = buffer.toString('utf-8');
+            const parsedmessage = parseFloat(str);
+            stirring.createReading(parsedmessage)
+        }
+    } catch(error) {
+        console.log(error)
     }
 });
 
